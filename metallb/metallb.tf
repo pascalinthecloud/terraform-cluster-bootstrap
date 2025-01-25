@@ -18,13 +18,11 @@ resource "helm_release" "metallb" {
 
 resource "kubernetes_manifest" "ip_pool" {
   depends_on = [helm_release.metallb]
-  provider   = kubernetes.default
   manifest   = file("${path.module}/configs/ip_pool.yaml")
 }
 
 resource "kubernetes_manifest" "l2_advertisement" {
   depends_on = [helm_release.metallb]
-  provider   = kubernetes.default
   manifest   = file("${path.module}/configs/l2_advertisement.yaml")
 }
 
