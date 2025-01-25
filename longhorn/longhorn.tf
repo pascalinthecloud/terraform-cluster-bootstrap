@@ -1,13 +1,15 @@
-resource "kubernetes_namespace" "longhorn" {
-  metadata {
-    name = "longhorn"
-    labels = {
-      "pod-security.kubernetes.io/enforce" = "privileged"
-    }
-  }
+resource "kubectl_manifest" "namespace" {
+    yaml_body = <<YAML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+YAML
 }
 resource "helm_release" "longhorn" {
-  depends_on = [kubernetes_namespace.longhorn]
+  depends_on = [kubectl_manifest.namespace]
   name       = "longhorn"
   chart      = "longhorn"
   repository = "https://charts.longhorn.io"
