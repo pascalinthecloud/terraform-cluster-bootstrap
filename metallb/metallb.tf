@@ -19,13 +19,13 @@ resource "helm_release" "metallb" {
   namespace  = "metallb-system"
 }
 
-resource "kubernetes_manifest" "ip_pool" {
+resource "kubectl_manifest" "ip_pool" {
   depends_on = [helm_release.metallb]
-  manifest   = yamldecode(file("${path.module}/configs/ip_pool.yaml"))
+  yaml_body   = yamldecode(file("${path.module}/configs/ip_pool.yaml"))
 }
 
-resource "kubernetes_manifest" "l2_advertisement" {
+resource "kubectl_manifest" "l2_advertisement" {
   depends_on = [helm_release.metallb]
-  manifest   = yamldecode(file("${path.module}/configs/l2_advertisement.yaml"))
+  yaml_body   = yamldecode(file("${path.module}/configs/l2_advertisement.yaml"))
 }
 
