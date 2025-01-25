@@ -21,7 +21,10 @@ resource "helm_release" "metallb" {
 
 resource "kubectl_manifest" "ip_pool" {
   depends_on = [helm_release.metallb]
-  yaml_body   = file("${path.module}/configs/ip_pool.yaml")
+  yaml_body   = templatefile("${path.module}/configs/ip_pool.yaml", 
+  {
+    "ip_range" = var.ip_range
+  })
 }
 
 resource "kubectl_manifest" "l2_advertisement" {
