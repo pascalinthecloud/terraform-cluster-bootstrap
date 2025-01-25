@@ -1,15 +1,18 @@
-resource "kubernetes_namespace" "metallb_system" {
-  metadata {
-    name = "metallb-system"
-    labels = {
-      "pod-security.kubernetes.io/enforce" = "privileged"
-      "pod-security.kubernetes.io/audit"   = "privileged"
-      "pod-security.kubernetes.io/warn"    = "privileged"
-    }
-  }
+resource "kubectl_manifest" "namespace" {
+    yaml_body = <<YAML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
+YAML
 }
+
 resource "helm_release" "metallb" {
-  depends_on = [kubernetes_namespace.metallb_system]
+  depends_on = [kubectl_manifest.namespace]
   name       = "metallb"
   chart      = "metallb"
   repository = "https://metallb.github.io/metallb"
