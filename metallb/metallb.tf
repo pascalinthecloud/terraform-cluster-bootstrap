@@ -18,11 +18,11 @@ resource "helm_release" "metallb" {
 
 resource "kubernetes_manifest" "ip_pool" {
   depends_on = [helm_release.metallb]
-  manifest   = file("${path.module}/configs/ip_pool.yaml")
+  manifest   = yamldecode(file("${path.module}/configs/ip_pool.yaml"))
 }
 
 resource "kubernetes_manifest" "l2_advertisement" {
   depends_on = [helm_release.metallb]
-  manifest   = file("${path.module}/configs/l2_advertisement.yaml")
+  manifest   = yamldecode(file("${path.module}/configs/l2_advertisement.yaml"))
 }
 
