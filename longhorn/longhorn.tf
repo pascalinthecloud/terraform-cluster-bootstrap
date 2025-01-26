@@ -14,6 +14,14 @@ resource "helm_release" "longhorn" {
   chart      = "longhorn"
   repository = "https://charts.longhorn.io"
   namespace  = "longhorn-system"
+   set = [{
+    name  = "service.ui.type"
+    value = "LoadBalancer"
+    },
+    {
+    name  = "service.manager.type"
+    value = "LoadBalancer"
+    }]
 
   version = "1.7.2"
 }
