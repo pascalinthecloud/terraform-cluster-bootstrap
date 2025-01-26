@@ -10,3 +10,7 @@ module "ingress_nginx" {
 module "longhorn" {
     source = "./longhorn"
 }
+
+module "prometheus" {
+    source = "./prometheus"
+}
