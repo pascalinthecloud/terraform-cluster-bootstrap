@@ -20,6 +20,7 @@ data:
 kind: Secret
 metadata:
   name: sops-gpg
+  namespace: argocd
 type: Opaque
 EOT
     type  = "auto"
