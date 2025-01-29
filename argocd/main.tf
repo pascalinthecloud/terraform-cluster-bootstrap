@@ -21,5 +21,4 @@ metadata:
 type: Opaque
 EOT
     type  = "auto"
-  }
-}]
+  }]
