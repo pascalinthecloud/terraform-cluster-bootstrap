@@ -9,7 +9,7 @@ resource "helm_release" "argocd" {
   values = [
     file("${path.module}/argocd.yaml")
   ]
-  set_sensitive {
+  set_sensitive = [{
     name  = "extraObjects[0]"
     value = <<EOT
 apiVersion: v1
@@ -22,4 +22,4 @@ type: Opaque
 EOT
     type  = "auto"
   }
-}
+}]
