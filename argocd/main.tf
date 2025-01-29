@@ -7,7 +7,7 @@ resource "helm_release" "argocd" {
   namespace        = "argocd"
   create_namespace = true
   values = [
-    file("${path.module}/helm_values/argocd.yaml")
+    file("${path.module}/argocd.yaml")
   ]
   set_sensitive {
     name  = "extraObjects[0]"
