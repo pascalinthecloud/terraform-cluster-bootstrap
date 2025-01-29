@@ -1,10 +1,3 @@
-# MetalLB
-variable "ip_range" {
-  description = "The IP range to use for MetalLB"
-  type        = string
-}
-
-# ArgoCD
 variable "argocd_host" {
   description = "The domain for the global configuration"
   type        = string

@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "namespace" {
-    yaml_body = <<YAML
+  yaml_body = <<YAML
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -9,16 +9,16 @@ metadata:
 YAML
 }
 resource "helm_release" "prometheus" {
-  depends_on = [ kubectl_manifest.namespace ]
-  name             = "prometheus"
-  chart            = "kube-prometheus-stack"
-  repository       = "https://prometheus-community.github.io/helm-charts"
-  namespace        = "monitoring"
-  version          = "68.3.0"
+  depends_on = [kubectl_manifest.namespace]
+  name       = "prometheus"
+  chart      = "kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  namespace  = "monitoring"
+  version    = "68.3.0"
   set = [{
     name  = "prometheus.service.type"
     value = "LoadBalancer"
     }
-    ]
+  ]
 
 }

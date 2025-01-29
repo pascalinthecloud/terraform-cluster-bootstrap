@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "namespace" {
-    yaml_body = <<YAML
+  yaml_body = <<YAML
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -14,14 +14,14 @@ resource "helm_release" "longhorn" {
   chart      = "longhorn"
   repository = "https://charts.longhorn.io"
   namespace  = "longhorn-system"
-   set = [{
+  set = [{
     name  = "service.ui.type"
     value = "LoadBalancer"
     },
     {
-    name  = "service.manager.type"
-    value = "LoadBalancer"
-    }]
+      name  = "service.manager.type"
+      value = "LoadBalancer"
+  }]
 
   version = "1.7.2"
 }
