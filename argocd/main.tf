@@ -22,3 +22,4 @@ type: Opaque
 EOT
     type  = "auto"
   }]
+}
