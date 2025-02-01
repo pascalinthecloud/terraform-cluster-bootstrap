@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ca-issuer
+spec:
+  acme:
+    email: ${EMAIL}
+    server: ${ACME_SERVER}
+    privateKeySecretRef:
+      name: cluster-issuer-account-key
+    solvers:
+    - dns01:
+        cloudflare:
+          email: ${EMAIL}
+          apiTokenSecretRef:
+            name: cloudflare-api-token
+            key: api-token

@@ -29,7 +29,7 @@ resource "time_sleep" "wait_30_seconds" {
 resource "kubectl_manifest" "l2_advertisement" {
   depends_on = [time_sleep.wait_30_seconds]
 
-  yaml_body  = file("${path.module}/configs/l2_advertisement.yaml")
+  yaml_body = file("${path.module}/configs/l2_advertisement.yaml")
 }
 
 resource "kubectl_manifest" "ip_pool" {
