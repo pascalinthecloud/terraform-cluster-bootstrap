@@ -11,11 +11,10 @@ resource "helm_release" "argocd" {
       host = var.argocd_host
     })
   ]
-    set = [
-      for annotation, value in var.ingress_annotations : {
-        name  = "ingress.annotations.${annotation}"
-        value = value
-      }
+    set = [{
+    name  = "ingress.annotations.cert-manager\\.io/cluster-issuer"
+    value = "cloudflare-issuer"
+    }
   ]
   set_sensitive = [{
     name  = "extraObjects[0]"
