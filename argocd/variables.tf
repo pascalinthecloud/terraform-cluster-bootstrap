@@ -13,3 +13,9 @@ variable "argocd_chart_version" {
   type        = string
   default     = "7.7.21"
 }
+
+variable "ingress_annotations" {
+  description = "Annotations to apply to the Ingress"
+  type        = map(string)
+  default     = {}
+}
