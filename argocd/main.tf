@@ -12,7 +12,7 @@ resource "helm_release" "argocd" {
     })
   ]
     set = [{
-    name  = "ingress.annotations.cert-manager\\.io/cluster-issuer"
+    name  = "server.ingress.annotations.cert-manager\\.io/cluster-issuer"
     value = "cloudflare-issuer"
     }
   ]
