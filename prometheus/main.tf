@@ -9,12 +9,14 @@ metadata:
 YAML
 }
 resource "helm_release" "prometheus" {
-  depends_on = [kubectl_manifest.namespace]
-  name       = "prometheus"
-  chart      = "kube-prometheus-stack"
-  repository = "https://prometheus-community.github.io/helm-charts"
-  namespace  = "monitoring"
-  version    = "68.3.0"
+  depends_on      = [kubectl_manifest.namespace]
+  name            = "prometheus"
+  chart           = "kube-prometheus-stack"
+  repository      = "https://prometheus-community.github.io/helm-charts"
+  namespace       = "monitoring"
+  version         = var.chart_version
+  lint            = true
+  cleanup_on_fail = true
   set = [{
     name  = "prometheus.service.type"
     value = "LoadBalancer"
