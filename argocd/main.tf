@@ -2,10 +2,11 @@ resource "helm_release" "argocd" {
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
-  version          = var.argocd_chart_version
-  lint             = true
+  version          = var.chart_version
   namespace        = "argocd"
+  lint             = true
   create_namespace = true
+  cleanup_on_fail  = true
   values = [
     templatefile("${path.module}/argocd.yaml", {
       host = var.argocd_host
