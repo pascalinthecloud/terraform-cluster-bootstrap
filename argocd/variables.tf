@@ -8,8 +8,8 @@ variable "argocd_gpg_key" {
   type        = string
 }
 
-variable "argocd_chart_version" {
-  description = "The version of the ArgoCD Helm chart to use"
+variable "chart_version" {
+  description = "The version of the Helm chart to use"
   type        = string
   default     = "7.7.21"
 }

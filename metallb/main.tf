@@ -13,10 +13,13 @@ YAML
 resource "helm_release" "metallb" {
   depends_on = [kubectl_manifest.namespace]
 
-  name       = "metallb"
-  chart      = "metallb"
-  repository = "https://metallb.github.io/metallb"
-  namespace  = "metallb-system"
+  name            = "metallb"
+  chart           = "metallb"
+  repository      = "https://metallb.github.io/metallb"
+  namespace       = "metallb-system"
+  version         = var.chart_version
+  lint            = true
+  cleanup_on_fail = true
 }
 
 # wait 30 seconds for crd to come available

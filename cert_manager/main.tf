@@ -3,8 +3,10 @@ resource "helm_release" "cert_manager" {
   chart            = "cert-manager"
   repository       = "https://charts.jetstack.io"
   namespace        = "cert-manager"
-  version          = "1.16.3"
+  version          = var.chart_version
+  lint             = true
   create_namespace = true
+  cleanup_on_fail  = true
 
   set = [{
     name  = "crds.enabled"
@@ -21,6 +23,7 @@ resource "kubectl_manifest" "cluster_issuer" {
     ACME_SERVER = var.acme_server
   })
 }
+
 resource "kubectl_manifest" "secret" {
   depends_on = [helm_release.cert_manager]
 
