@@ -12,11 +12,11 @@ resource "helm_release" "argocd" {
       host = var.argocd_host
     })
   ]
-    set = [
-      for annotation, value in var.ingress_annotations : {
-        name  = "server.ingress.annotations.${annotation}"
-        value = value
-      }
+  set = [
+    for annotation, value in var.ingress_annotations : {
+      name  = "server.ingress.annotations.${annotation}"
+      value = value
+    }
   ]
   set_sensitive = [{
     name  = "extraObjects[0]"
