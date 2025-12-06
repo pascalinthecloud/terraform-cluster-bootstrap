@@ -29,17 +29,10 @@ resource "time_sleep" "wait_30_seconds" {
   create_duration = "30s"
 }
 
-resource "kubectl_manifest" "l2_advertisement" {
+resource "kubectl_manifest" "additional" {
+  for_each = { for idx, manifest in var.additional_manifests : idx => manifest }
+
   depends_on = [time_sleep.wait_30_seconds]
 
-  yaml_body = file("${path.module}/configs/l2_advertisement.yaml")
-}
-
-resource "kubectl_manifest" "ip_pool" {
-  depends_on = [time_sleep.wait_30_seconds]
-
-  yaml_body = templatefile("${path.module}/configs/ip_pool.yaml",
-    {
-      "ip_range" = var.ip_range
-  })
+  yaml_body = each.value
 }
